@@ -22,3 +22,67 @@ select,
 textarea {
     max-width: 280px;
 }
+
+table thead {
+    background-color: gainsboro;
+}
+
+.red-text {
+    color: red;
+}
+
+.green-text {
+    color: #00d200;
+}
+
+.capitalized {
+    text-transform: capitalize;
+}
+
+.no-highlight {
+    opacity: 0.3;
+}
+
+    .no-highlight:hover {
+        opacity: unset;
+    }
+
+.modal {
+    text-align: center;
+    padding: 0 !important;
+}
+
+    .modal:before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        margin-right: -4px;
+    }
+
+.modal-dialog {
+    display: inline-block;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/*h2{
+    border-left: 3px solid #4eb9ea;
+    padding-left: 6px;
+    background: aliceblue;
+    padding-bottom: 3px;
+    padding-top: 3px;
+}*/
+
+.emi-payment-table tr {
+    padding-bottom: 3px;
+}
+
+.navbar a.glyphicon {
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.navbar a {
+    text-decoration: none;
+}

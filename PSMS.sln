@@ -5,6 +5,10 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSMS", "PSMS\PSMS.csproj", "{723B64AB-6CF3-44B1-BF00-F65D3CFA6558}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSMS.Utilities", "PSMS.Utilities\PSMS.Utilities.csproj", "{CE8E7DE7-AD46-479D-905E-04729D2F12E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSMS.Domain", "PSMS.Domain\PSMS.Domain.csproj", "{ED4DCBED-497A-406F-9707-073C456D484E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{723B64AB-6CF3-44B1-BF00-F65D3CFA6558}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{723B64AB-6CF3-44B1-BF00-F65D3CFA6558}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{723B64AB-6CF3-44B1-BF00-F65D3CFA6558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE8E7DE7-AD46-479D-905E-04729D2F12E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE8E7DE7-AD46-479D-905E-04729D2F12E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE8E7DE7-AD46-479D-905E-04729D2F12E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE8E7DE7-AD46-479D-905E-04729D2F12E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED4DCBED-497A-406F-9707-073C456D484E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED4DCBED-497A-406F-9707-073C456D484E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED4DCBED-497A-406F-9707-073C456D484E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED4DCBED-497A-406F-9707-073C456D484E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
