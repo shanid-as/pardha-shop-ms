@@ -1,0 +1,68 @@
+﻿@model PSMS.Areas.Order.Models.BookingModel
+
+<style type="text/css">
+    .bordered-cell {
+        border: 1px solid black;
+    }
+
+    .measurement-table {
+    }
+</style>
+
+<h2 class="page-header">@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+    <br />
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.BookingNo, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.BookingNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.BookingId, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.BookingId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "dd/mmm/yyyy" } })
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => model.CustomerId, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.CustomerId, new SelectList(ViewBag.CustomerDropdown, "Id", "Name", Model.CustomerId), PSMS.Utilities.Constants.DROPDOWN_DEFAULT_OPTION, new { @class = "form-control" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-5">
+                @Html.LabelFor(model => model.MeasurementId, htmlAttributes: new { @class = "control-label" })
+                <select class="form-control">
+                    <option>Measurement on 12/02/2018</option>
+                    <option>Measurement on 25/07/2018</option>
+                </select>
+                <br />
+                @Html.Partial("_MeasurementTable", Model)
+            </div>
+            <div class="col-md-5">
+                @Html.LabelFor(model => model.PreferenceId, htmlAttributes: new { @class = "control-label" })
+                <select class="form-control">
+                    <option>Preference on 12/02/2018</option>
+                    <option>Preference on 25/07/2018</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+
+        </div>
+    </div>
+}
+

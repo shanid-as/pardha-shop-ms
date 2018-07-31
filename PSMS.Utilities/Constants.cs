@@ -10,7 +10,8 @@ namespace PSMS.Utilities
     {
         public const string SESSION_USER = "SESSION_USER";
         public const string PRODUCT_NAME = "Foreign Pardha Shop";
-        public const string DateFormat = "dd-MMM-yyyy";
-        public const string DatepickerDateFormat = "dd-M-yy";
+        public const string DATE_FORMAT = "dd-MMM-yyyy";
+        public const string DATEPICKER_DATE_FORMAT = "dd-M-yy";
+        public const string DROPDOWN_DEFAULT_OPTION = "- Select -";
     }
 }

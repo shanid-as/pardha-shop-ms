@@ -2,8 +2,18 @@
 
 @{
     ViewBag.Title = "Error";
+    Layout = null;
 }
 
 <h1 class="text-danger">Error.</h1>
 <h2 class="text-danger">An error occurred while processing your request.</h2>
 
+<a href="#" data-toggle="collapse" data-target="#dvMoreInfo">More Information</a>
+<div id="dvMoreInfo" class="collapse">
+    <p>
+        Exception : @Model.Exception
+    </p>
+    <p>
+        @Model.Exception.Message
+    </p>
+</div>

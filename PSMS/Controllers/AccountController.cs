@@ -9,6 +9,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PSMS.Models;
+using System.Configuration;
+using PSMS.Utilities;
+using PSMS.Domain;
+using PSMS.Business;
+using System.Web.Security;
 
 namespace PSMS.Controllers
 {
@@ -57,6 +62,13 @@ namespace PSMS.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            try
+            {
+                string[] url = returnUrl.Split('/');
+                if (url[url.Length - 1] == "LogOff")
+                    returnUrl = "/";
+            }
+            catch (NullReferenceException) { returnUrl = "/"; }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -73,22 +85,54 @@ namespace PSMS.Controllers
                 return View(model);
             }
 
+            string salt = ConfigurationManager.AppSettings["salt"].ToString();
+            string saltpassword = String.Concat(salt, model.Password);
+            string encPassword = saltpassword.Encrypt();
+            User user = new UserLogic().ValidateAndSelectUser(model.Username, encPassword);
+            if (user == null || user.UserID == 0)
+            {
+                ModelState.AddModelError("", "Credentials do not match. Please try again.");
+                return View(model);
+            }
+            else
+            {
+                StoreAuthorisationData(user, model.RememberMe, HttpContext.Response.Cookies);
+                return RedirectToLocal(returnUrl);
+            }
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
-            }
+            //var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            //switch (result)
+            //{
+            //    case SignInStatus.Success:
+            //        return RedirectToLocal(returnUrl);
+            //    case SignInStatus.LockedOut:
+            //        return View("Lockout");
+            //    case SignInStatus.RequiresVerification:
+            //        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+            //    case SignInStatus.Failure:
+            //    default:
+            //        ModelState.AddModelError("", "Invalid login attempt.");
+            //        return View(model);
+            //}
+        }
+
+        private void StoreAuthorisationData(User user, bool isPersistent, HttpCookieCollection cookiecollection)
+        {
+            var userData = String.Format("{0}|{1}|{2}",
+                user.UserID.Encrypt(), user.Username, user.Roles.Encrypt());
+            var ticket = new FormsAuthenticationTicket(1, userData, DateTime.UtcNow, DateTime.UtcNow.AddMinutes(360), isPersistent, userData, FormsAuthentication.FormsCookiePath);
+            var encryptedTicket = FormsAuthentication.Encrypt(ticket);
+            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket) { HttpOnly = true };
+            cookiecollection.Add(authCookie);
+
+            HttpCookie userCookie = new HttpCookie("userCookie") { HttpOnly = true };
+            userCookie.Values.Add("UserId", user.UserID.Encrypt());
+            userCookie.Values.Add("Username", user.Username);
+            userCookie.Values.Add("Roles", user.Roles.Encrypt());
+            cookiecollection.Add(userCookie);
+            Session.Add(Utilities.Constants.SESSION_USER, userCookie);
         }
 
         //

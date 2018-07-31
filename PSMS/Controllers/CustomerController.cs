@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace PSMS.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomerController : BaseController
     {
         // GET: Customer
         public ActionResult Index()

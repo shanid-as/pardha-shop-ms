@@ -167,9 +167,12 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Order\Controllers\BookingController.cs" />
+    <Compile Include="Areas\Order\Models\BookingModel.cs" />
     <Compile Include="Areas\Order\OrderAreaRegistration.cs" />
     <Compile Include="Areas\Reports\ReportsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -199,8 +202,13 @@
     <Content Include="fonts\icomoon.eot" />
     <Content Include="fonts\icomoon.ttf" />
     <Content Include="fonts\icomoon.woff" />
-    <Content Include="Areas\Order\Views\web.config" />
     <Content Include="Areas\Reports\Views\web.config" />
+    <Content Include="Areas\Order\Views\web.config" />
+    <Content Include="Areas\Order\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Order\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Order\Views\Booking\Index.cshtml" />
+    <Content Include="Areas\Order\Views\Booking\Create.cshtml" />
+    <Content Include="Areas\Order\Views\Booking\_MeasurementTable.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -254,15 +262,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Order\Controllers\" />
-    <Folder Include="Areas\Order\Models\" />
-    <Folder Include="Areas\Order\Views\Shared\" />
     <Folder Include="Areas\Reports\Controllers\" />
     <Folder Include="Areas\Reports\Models\" />
     <Folder Include="Areas\Reports\Views\Shared\" />
     <Folder Include="Content\images\" />
     <Folder Include="Content\menu\" />
     <Folder Include="Scripts\menu\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -273,6 +279,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PSMS.Business\PSMS.Business.csproj">
+      <Project>{c98bd3cd-652d-4edf-adc3-940bc3646453}</Project>
+      <Name>PSMS.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PSMS.Domain\PSMS.Domain.csproj">
       <Project>{ed4dcbed-497a-406f-9707-073c456d484e}</Project>
       <Name>PSMS.Domain</Name>
